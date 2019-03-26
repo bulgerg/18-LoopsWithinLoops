@@ -60,8 +60,10 @@ def draw_L(window, circle, r, c):
         circle.center.x = x
         circle.center.y = circle.center.y + 2*circle.radius
         for j in range(3):
-            circle.attach_to(window)
-            circle.center.x = circle.center.x + 2*circle.radius
+            new_circle = rg.Circle(circle.center, circle.radius)
+            new_circle.center.x = new_circle.center.x + 2*circle.radius
+            new_circle = rg.Circle(rg.Point(new_circle.center.x, circle.center.y), circle.radius)
+            new_circle.attach_to(window)
             window.render(0.1)
     y2 = circle.center.y
     for k in range(c):
