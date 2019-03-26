@@ -274,9 +274,8 @@ def print_characters_slanted(sequence_of_strings):
     for i in range(len(sequence_of_strings)):
         sublist = sequence_of_strings[i]
         for j in range(len(sublist)):
-            print(str('')*j, end='')
-            print(sublist[j])
-        print()
+            print(' '*j, sublist[j])
+
     """
     Same as the previous problem, but each string 'slants'.
     For example, if the given argument is ['hi', 'bye', 'a_tie!'],
@@ -295,7 +294,7 @@ def print_characters_slanted(sequence_of_strings):
     Precondition:  the given argument is a sequence of strings.
     """
     # ------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #  ** READ THE TESTS that have been written for you (ABOVE).
     #  ** ASK QUESTIONS if you do not understand the TESTS (ABOVE).
     #
