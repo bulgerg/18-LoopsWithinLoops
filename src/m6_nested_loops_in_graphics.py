@@ -11,7 +11,7 @@ import rosegraphics as rg
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    #run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -55,23 +55,24 @@ def run_test_draw_L():
 
 
 def draw_L(window, circle, r, c):
-    x = circle.center.x
     for i in range(r + 3):
-        circle.center.x = x
-        circle.center.y = circle.center.y + 2*circle.radius
+        y = circle.center.y + circle.radius*2*i
         for j in range(3):
             new_circle = rg.Circle(circle.center, circle.radius)
-            new_circle.center.x = new_circle.center.x + 2*circle.radius
-            new_circle = rg.Circle(rg.Point(new_circle.center.x, circle.center.y), circle.radius)
+            new_circle.center.x = new_circle.center.x + 2*circle.radius*j
+            new_circle.center.y = y
+            new_circle.fill_color = circle.fill_color
+            final_center = new_circle.center
             new_circle.attach_to(window)
             window.render(0.1)
-    y2 = circle.center.y
-    for k in range(c):
-        circle.center.x = circle.center.x + 2*circle.radius
-        circle.center.y = y2
+    for k in range(c + 1):
+        x = final_center.x + circle.radius*2*k
         for l in range(3):
-            circle.attach_to(window)
-            circle.center.y = circle.center.y - 2*circle.radius
+            new_circle2 = rg.Circle(rg.Point(1,final_center.y), circle.radius)
+            new_circle2.center.x = x
+            new_circle2.center.y = new_circle2.center.y - 2*circle.radius*l
+            new_circle2.fill_color = circle.fill_color
+            new_circle2.attach_to(window)
             window.render(0.1)
     """
     See   L.pdf   in this project for pictures that may
@@ -98,7 +99,7 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
@@ -121,6 +122,17 @@ def run_test_draw_wall_on_right():
 
 
 def draw_wall_on_right(rectangle, n, window):
+    p1 = rectangle.get_upper_right_corner()
+    p2 = rectangle.get_lower_left_corner()
+    width = rectangle.get_width()
+    height = rectangle.get_height()
+    for i in range(n):
+        for j in range(i + 1):
+            p3 = rg.Point(p1.x - j*width, p1.y + i*height)
+            p4 = rg.Point(p2.x - j*width, p2.y + i*height)
+            new_rec = rg.Rectangle(p3, p4)
+            new_rec.attach_to(window)
+            window.render(0.1)
     """
     See   Walls.pdf   in this project for pictures that may
     help you better understand the following specification:
@@ -139,7 +151,7 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
